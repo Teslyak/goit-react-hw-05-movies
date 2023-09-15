@@ -1,28 +1,52 @@
 import { Layout } from "components/Layout"
 import { fetchMovies } from "api";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
-export const Home = async (listMovies) => {
+export const Home =  () => {
+  const [trendigList, setTrendigList] = useState([])
+  
+  useEffect(() => {
+    
 
-    const [trendigList, setTrendigList] = useState([])
-
-  try {
-      const { results } = await fetchMovies(listMovies)
+    const queryTrendMovie = async () => {
       
-    //   setTrendigList(prevState => ([...prevState, results]))
-    console.log(results); 
-  } catch (error) {
-    console.log(error);
-  }
+      try {
+        const {results}  = await fetchMovies()
+        setTrendigList(prevState => {
+          const arr = [...results]
+         return  arr
+        } )
+        
+      } catch (error) {
+        console.log("error", error);
+      } finally {
 
-
-    return (
+      }
+    
+    }
+    queryTrendMovie()
+   
+  }, [])
+  
+  return (
+      
         <>
         <Layout/>
-            <ul>
-
+            <ul >
+        {trendigList.map(item => {
+          return (
+            <li key={item.id}>
+              <Link to={`/movies/${item.id}`}>
+                {!item.original_title ? item.name : item.original_title}
+              </Link>
+              
+           </li>  
+           )
+         })}
+        
             </ul>
             </>
     )
 }
-Home()
+
