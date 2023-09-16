@@ -1,5 +1,5 @@
-import { Layout } from "components/Layout"
-import { fetchMovies } from "api";
+
+import { fetchTrendingMovies } from "api";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -12,7 +12,7 @@ export const Home =  () => {
     const queryTrendMovie = async () => {
       
       try {
-        const {results}  = await fetchMovies()
+        const {results}  = await fetchTrendingMovies()
         setTrendigList(prevState => {
           const arr = [...results]
          return  arr
@@ -32,16 +32,15 @@ export const Home =  () => {
   return (
       
         <>
-        <Layout/>
+       
             <ul >
         {trendigList.map(item => {
           return (
-            <li key={item.id}>
-              <Link to={`/movies/${item.id}`}>
-                {!item.original_title ? item.name : item.original_title}
+            <li key={item.id} >
+              <Link to={`/movies/${item.id}`}  >
+                {!item.title ? item.name : item.title}
               </Link>
-              
-           </li>  
+              </li>
            )
          })}
         

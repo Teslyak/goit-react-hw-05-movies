@@ -9,13 +9,13 @@ export const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={ <Layout/>} />
+      <Route path="/" element={ <Layout/>} >
           <Route path="home" element={<Home />} />
           <Route path="movies" element={<Movies />} />
           <Route path="/movies/:movieId" element={<MovieDetails/>}/>
           {/* <Route path="/movies/:movieId/cast" />
           <Route path="/movies/:movieId/reviews" /> */}
-      
+      </Route>
    </Routes> 
   );
 };
