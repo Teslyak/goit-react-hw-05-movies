@@ -13,3 +13,8 @@ export const getMoviesDetails = async (movie_id) => {
 const resp = await axios.get(`/movie/${movie_id}?api_key=${API_KEY}`);
   return resp.data;
 };
+
+export const getCredits = async (movie_id) => {
+const resp = await axios.get(`/movie/${movie_id}/credits?api_key=${API_KEY}`);
+  return resp.data;
+};

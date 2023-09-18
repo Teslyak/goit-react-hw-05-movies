@@ -6,10 +6,6 @@ import { useState, useEffect} from "react";
 
 
 
-
-
-
-
 export const Home = () => {
   const [trendigList, setTrendigList] = useState([])
  
@@ -39,9 +35,6 @@ export const Home = () => {
   return (
       
     <>
-       
-      
-      
            <ul >
         {trendigList.map(item => {
           return (

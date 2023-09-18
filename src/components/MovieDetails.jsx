@@ -1,6 +1,6 @@
 import { getMoviesDetails } from "api"
 import { useEffect, useState} from "react"
-import { Link, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 
 
 
@@ -43,8 +43,28 @@ export const MovieDetails = () => {
                         <p>{`${genres.map(e => (e.name)).join(", ")}`}</p>
                         <img src={`https://image.tmdb.org/t/p/w500/${resultMovie.poster_path}`} alt={`poster ${resultMovie.title}`} />
                     </div>
+                   
                 }
+
             </div>
+
+            {resultMovie.title &&
+            <div>
+                <p>Additional information</p>
+                <ul>
+                    <li>
+                        <Link to="cast" >Cast</Link>     
+                    </li>
+                    <li>
+                        <Link to="reviews" >Reviews</Link>
+                        
+                    </li>
+                </ul>
+            </div>
+            
+            }
+            
+             <Outlet/>
         </>
     )
 }
