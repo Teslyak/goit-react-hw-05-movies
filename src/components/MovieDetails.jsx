@@ -1,11 +1,14 @@
 import { getMoviesDetails } from "api"
-import { useEffect, useState } from "react"
-import { useParams } from 'react-router-dom';
+import { useEffect, useState} from "react"
+import { Link, useParams } from 'react-router-dom';
+
+
+
+
 export const MovieDetails = () => {
     const [resultMovie, setResultMovie] = useState([])
     const [genres, setGenres] = useState([])
     const { movieId } = useParams()
-
     useEffect(() => {
         const queryDetailsMovie = async () => {
             try {
@@ -27,11 +30,13 @@ export const MovieDetails = () => {
     return ( 
         <>
         <div>
-                <button>Go back</button>
+                <button>
+                    <Link to="/"> &#8592; Go back</Link>
+                </button>
                 {!resultMovie.title ? <p>Sorry, there is no information for this movie</p> :
                     <div>
                         <h1>{`${resultMovie.title} (${!resultMovie.release_date ? "unknown" : resultMovie.release_date.split('-')[0]}) `}</h1>
-                        <p>{`User Score: ${!resultMovie.popularity ? "unknown" : resultMovie.popularity ^ 0}%`}</p>
+                        <p>{`User Score: ${!resultMovie.vote_average ? "unknown" : resultMovie.vote_average ^ 0}%`}</p>
                         <h2>Overview</h2>
                         <p>{`${!resultMovie.overview ? "unknow" : resultMovie.overview}`}</p>
                         <h2>Genres:</h2>
@@ -40,7 +45,6 @@ export const MovieDetails = () => {
                     </div>
                 }
             </div>
-           
         </>
     )
 }

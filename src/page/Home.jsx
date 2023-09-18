@@ -1,11 +1,18 @@
 
-import { fetchTrendingMovies } from "api";
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { fetchTrendingMovies } from "api";
+import { useState, useEffect} from "react";
 
-export const Home =  () => {
+
+
+
+
+
+
+export const Home = () => {
   const [trendigList, setTrendigList] = useState([])
-  
+ 
   useEffect(() => {
     
 
@@ -28,23 +35,26 @@ export const Home =  () => {
     queryTrendMovie()
    
   }, [])
-  
+ 
   return (
       
-        <>
+    <>
        
-            <ul >
+      
+      
+           <ul >
         {trendigList.map(item => {
           return (
             <li key={item.id} >
-              <Link to={`/movies/${item.id}`}  >
+              <Link to={`movies/${item.id}`}  >
                 {!item.title ? item.name : item.title}
               </Link>
               </li>
            )
          })}
         
-            </ul>
+      </ul>
+      
             </>
     )
 }
