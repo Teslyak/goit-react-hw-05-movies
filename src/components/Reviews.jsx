@@ -10,16 +10,20 @@ import { useParams } from "react-router-dom"
 export const Reviews = () => {
  const [resultReviews, setResultReviews] = useState([])
     const { movieId } = useParams()
+
     useEffect(() => {
         const queryReviews = async () => {
             try {
                 const { results } = await getReviews(movieId)
                 setResultReviews([ ...results ] )
 
-      } catch (error) {
-        console.log(error);
+            } catch (error) {
+                
+                console.log(error);
+                
       }
         }
+        
       
 
        queryReviews()
