@@ -1,6 +1,5 @@
 
 import { Link } from "react-router-dom";
-
 import { fetchTrendingMovies } from "api";
 import { useState, useEffect} from "react";
 
@@ -16,10 +15,7 @@ export const Home = () => {
       
       try {
         const {results}  = await fetchTrendingMovies()
-        setTrendigList(prevState => {
-          const arr = [...results]
-         return  arr
-        } )
+        setTrendigList([...results])
         
       } catch (error) {
         console.log("error", error);

@@ -15,7 +15,7 @@ export const Cast = () => {
                 setResultCredits([ ...result.cast ] )
                 
       } catch (error) {
-        console.log(error);
+        console.log("error", error);
       }
         }
       
@@ -26,7 +26,6 @@ export const Cast = () => {
 
     return (
         <>
-            {console.log(resultCredits)}
             {resultCredits.length ? 
             <section>
                 <ul>
@@ -49,7 +48,7 @@ export const Cast = () => {
                     
                 </ul>
                
-                </section> : <section><p> "No information to display"</p></section>
+                </section> : <section><p> "We don't have any reviews for this movie"</p></section>
             }
 
 

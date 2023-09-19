@@ -16,14 +16,13 @@ export const Reviews = () => {
             try {
                 const { results } = await getReviews(movieId)
                 setResultReviews([ ...results ] )
-
             } catch (error) {
                 
                 console.log(error);
                 
       }
         }
-        
+
       
 
        queryReviews()
@@ -53,7 +52,7 @@ export const Reviews = () => {
                     
                     </ul>
                
-                </section> : <section><p> "No information to display"</p></section>
+                </section> : <section><p> "We don't have any reviews for this movie"</p></section>
             }
            
         </> 

@@ -16,7 +16,7 @@ export const MovieDetails = () => {
                 setResultMovie({ ...result })
                 setGenres(result.genres)
       } catch (error) {
-        console.log(error);
+        console.log("error", error);
       }
         }
       

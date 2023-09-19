@@ -23,7 +23,7 @@ export const Movies = () => {
                 const {results} = await getSearchMovie(searchMovie)
                 setResultSearchMovie([...results])
             } catch (error) {     
-            console.log(error);
+            console.log("error", error);
          }
         }
         querySearchMovie()
