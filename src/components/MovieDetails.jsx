@@ -13,7 +13,6 @@ export const MovieDetails = () => {
         const queryDetailsMovie = async () => {
             try {
                 const result = await getMoviesDetails(movieId)
-                console.log(result);
                 setResultMovie({ ...result })
                 setGenres(result.genres)
       } catch (error) {
@@ -41,7 +40,7 @@ export const MovieDetails = () => {
                         <p>{`${!resultMovie.overview ? "unknow" : resultMovie.overview}`}</p>
                         <h2>Genres:</h2>
                         <p>{`${genres.map(e => (e.name)).join(", ")}`}</p>
-                        <img src={`https://image.tmdb.org/t/p/w500/${resultMovie.poster_path}`} alt={`poster ${resultMovie.title}`} />
+                        <img src={`https://image.tmdb.org/t/p/w500/${resultMovie.poster_path}`} alt={`poster ${resultMovie.title}`} width={250}/>
                     </div>
                    
                 }

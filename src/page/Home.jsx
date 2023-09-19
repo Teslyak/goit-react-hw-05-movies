@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import styled from 'styled-components';
+
 import { fetchTrendingMovies } from "api";
 import { useState, useEffect} from "react";
 
