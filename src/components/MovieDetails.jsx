@@ -40,7 +40,10 @@ export const MovieDetails = () => {
                         <p>{`${!resultMovie.overview ? "unknow" : resultMovie.overview}`}</p>
                         <h2>Genres:</h2>
                         <p>{`${genres.map(e => (e.name)).join(", ")}`}</p>
-                        <img src={`https://image.tmdb.org/t/p/w500/${resultMovie.poster_path}`} alt={`poster ${resultMovie.title}`} width={250}/>
+
+                        {resultMovie.poster_path ? <img src={`https://image.tmdb.org/t/p/w500/${resultMovie.poster_path}`} alt={`poster ${resultMovie.title}`} width={250} /> :
+                         <img src="https://via.placeholder.com/200x200.png?text=NO+PHOTO" alt="no_photo"  width={250} />}
+                        
                     </div>
                    
                 }

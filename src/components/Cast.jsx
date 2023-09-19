@@ -1,12 +1,10 @@
 import { getCredits } from "api"
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 
 export const Cast = () => {
-    const notify = () => toast("Wow so easy!");
+    
     const [resultCredits, setResultCredits] = useState([])
     const { movieId } = useParams()
     useEffect(() => {
@@ -23,11 +21,13 @@ export const Cast = () => {
       
 
        queryCredits()
-     notify()
+    
     }, [movieId])
 
     return (
         <>
+            {console.log(resultCredits)}
+            {resultCredits.length ? 
             <section>
                 <ul>
                     {resultCredits.map(item => {
@@ -48,8 +48,11 @@ export const Cast = () => {
                     } 
                     
                 </ul>
-               <ToastContainer />
-            </section>
+               
+                </section> : <section><p> "No information to display"</p></section>
+            }
+
+
         </> 
     )
 }
