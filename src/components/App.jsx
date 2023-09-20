@@ -2,6 +2,9 @@ import { Route, Routes, useNavigate} from "react-router-dom";
 import { Suspense, lazy, useEffect } from "react";
 import styled from 'styled-components';
 import { NavLink } from "react-router-dom";
+import { RootStyle } from "./RootStyled/RootSteled.styled";
+
+
 
 const Home = lazy(()=> import("page/Home"))
 const Movies = lazy(() => import("page/Movies"))
@@ -31,8 +34,8 @@ export const App = () => {
   return (
     <>
 
-    <header> 
-            <ul>
+    <header  > 
+            <ul >
                 <li>
                     <StyledLink to="/">
                             Home
@@ -68,7 +71,7 @@ export const App = () => {
         </Routes>
       </Suspense>
       
-   
+   <RootStyle/>
     </>
   );
 };

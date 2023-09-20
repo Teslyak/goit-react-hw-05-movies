@@ -1,8 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import-normalize; /* bring in normalize.css styles */
+import { createGlobalStyle } from 'styled-components';
+import 'modern-normalize';
+export const RootStyle = createGlobalStyle`
 
 body {
   margin: 0;
@@ -18,4 +16,13 @@ code {
     monospace;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
+#root {
+  
+}
+`;
