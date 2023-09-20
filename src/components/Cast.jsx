@@ -3,24 +3,30 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
 
-export const Cast = () => {
+ const Cast = () => {
     
     const [resultCredits, setResultCredits] = useState([])
-    const { movieId } = useParams()
-    useEffect(() => {
+     const { movieId } = useParams()
+     
+     useEffect(() => {
+        const controller = new AbortController()
         const queryCredits = async () => {
             try {
-                const result = await getCredits(movieId)
+                const result = await getCredits(movieId, controller)
                 
                 setResultCredits([ ...result.cast ] )
                 
       } catch (error) {
-        console.log("error", error);
+                console.log("error", error);
+                
       }
         }
       
 
-       queryCredits()
+         queryCredits()
+         return () => {
+             controller.abort()     
+    }
     
     }, [movieId])
 
@@ -48,10 +54,12 @@ export const Cast = () => {
                     
                 </ul>
                
-                </section> : <section><p> "We don't have any reviews for this movie"</p></section>
+                </section> : <section><p> We don't have any reviews for this movie</p></section>
             }
 
 
         </> 
     )
 }
+
+export default Cast

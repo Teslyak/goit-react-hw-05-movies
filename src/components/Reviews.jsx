@@ -7,14 +7,15 @@ import { useParams } from "react-router-dom"
 
 
 
-export const Reviews = () => {
+ const Reviews = () => {
  const [resultReviews, setResultReviews] = useState([])
     const { movieId } = useParams()
 
-    useEffect(() => {
+     useEffect(() => {
+        const controller = new AbortController()
         const queryReviews = async () => {
             try {
-                const { results } = await getReviews(movieId)
+                const { results } = await getReviews(movieId, controller)
                 setResultReviews([ ...results ] )
             } catch (error) {
                 
@@ -22,10 +23,10 @@ export const Reviews = () => {
                 
       }
         }
-
-      
-
-       queryReviews()
+         queryReviews()
+         return () => {
+             controller.abort()       
+    }
     
     }, [movieId])
 
@@ -52,7 +53,7 @@ export const Reviews = () => {
                     
                     </ul>
                
-                </section> : <section><p> "We don't have any reviews for this movie"</p></section>
+                </section> : <section><p> We don't have any reviews for this movie</p></section>
             }
            
         </> 
@@ -63,3 +64,4 @@ export const Reviews = () => {
    
     
 }
+export default Reviews

@@ -1,12 +1,13 @@
 import { Route, Routes, useNavigate} from "react-router-dom";
-import { Home } from "page/Home";
-import { Movies } from "page/Movies";
-import { MovieDetails } from "./MovieDetails";
-import { useEffect } from "react";
+import { Suspense, lazy, useEffect } from "react";
 import styled from 'styled-components';
 import { NavLink } from "react-router-dom";
-import { Cast } from "./Cast";
-import { Reviews } from "./Reviews";
+
+const Home = lazy(()=> import("page/Home"))
+const Movies = lazy(() => import("page/Movies"))
+const MovieDetails = lazy(() => import("./MovieDetails"))
+const Cast = lazy(() => import("./Cast"))
+const Reviews = lazy(() => import("./Reviews"))
 
 const StyledLink = styled(NavLink)`
   color: black;
@@ -47,16 +48,27 @@ export const App = () => {
             </ul>
            
       </header>
-
-    <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/movies" element={<Movies/>} />
-      <Route path="/movies/:movieId" element={<MovieDetails />} >
-        <Route path="cast" element={<Cast/>} />
-        <Route path="reviews" element={<Reviews/>}/>
-      </Route>
-       <Route path="*" element={<NotFound />} />
-    </Routes> 
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          
+          <Route path="/" element={<Home />} />
+          
+          <Route path="/movies" element={<Movies />} />
+          
+          <Route path="/movies/:movieId" element={<MovieDetails />} >
+            
+            <Route path="cast" element={<Cast />} />
+            
+            <Route path="reviews" element={<Reviews />} />
+            
+          </Route>
+          
+          <Route path="*" element={<NotFound />} />
+          
+        </Routes>
+      </Suspense>
+      
+   
     </>
   );
 };

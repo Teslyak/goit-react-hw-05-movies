@@ -5,16 +5,16 @@ import { useState, useEffect} from "react";
 
 
 
-export const Home = () => {
+ const Home = () => {
   const [trendigList, setTrendigList] = useState([])
  
   useEffect(() => {
-    
+    const controller = new AbortController()
 
     const queryTrendMovie = async () => {
       
       try {
-        const {results}  = await fetchTrendingMovies()
+        const {results}  = await fetchTrendingMovies(controller)
         setTrendigList([...results])
         
       } catch (error) {
@@ -25,7 +25,11 @@ export const Home = () => {
     
     }
     queryTrendMovie()
-   
+
+    return () => {
+     controller.abort()
+    }
+    
   }, [])
  
   return (
@@ -48,3 +52,4 @@ export const Home = () => {
     )
 }
 
+export default Home

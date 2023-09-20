@@ -1,38 +1,52 @@
 import { getMoviesDetails } from "api"
-import { useEffect, useState} from "react"
+import { useEffect, useState, Suspense} from "react"
 import { Link, Outlet, useParams } from 'react-router-dom';
 
 
 
 
-export const MovieDetails = () => {
-    const [resultMovie, setResultMovie] = useState([])
+ const MovieDetails = () => {
+    const [resultMovie, setResultMovie] = useState({})
     const [genres, setGenres] = useState([])
-    const { movieId } = useParams()
-    useEffect(() => {
+     const { movieId } = useParams()
+     const [error,setError] = useState(true)
+     useEffect(() => {
+         const controller = new AbortController()
         const queryDetailsMovie = async () => {
             try {
-                const result = await getMoviesDetails(movieId)
+                const result = await getMoviesDetails(movieId, controller)
                 setResultMovie({ ...result })
                 setGenres(result.genres)
+               
       } catch (error) {
-        console.log("error", error);
+                console.log("error", error);
+                if (error.code === "ERR_BAD_REQUEST") {
+                    setError(false)
+                }
+                
       }
-        }
-      
-
-       queryDetailsMovie()
+         }
+         
+         queryDetailsMovie()
+         
+         return () => {
+             controller.abort()
+             
+             
+         }
+         
      
     }, [movieId])
      
 
     return ( 
         <>
-        <div>
+            { resultMovie.title &&
+            <div>
                 <button>
                     <Link to="/"> &#8592; Go back</Link>
                 </button>
-                {!resultMovie.title ? <p>Sorry, there is no information for this movie</p> :
+                 { !error ? <p>Sorry, there is no information for this movie</p> :
                     <div>
                         <h1>{`${resultMovie.title} (${!resultMovie.release_date ? "unknown" : resultMovie.release_date.split('-')[0]}) `}</h1>
                         <p>{`User Score: ${!resultMovie.vote_average ? "unknown" : resultMovie.vote_average ^ 0}%`}</p>
@@ -43,13 +57,14 @@ export const MovieDetails = () => {
 
                         {resultMovie.poster_path ? <img src={`https://image.tmdb.org/t/p/w500/${resultMovie.poster_path}`} alt={`poster ${resultMovie.title}`} width={250} /> :
                          <img src="https://via.placeholder.com/200x200.png?text=NO+PHOTO" alt="no_photo"  width={250} />}
-                        
+                       
                     </div>
                    
-                }
+                 } 
 
             </div>
-
+}
+        
             {resultMovie.title &&
             <div>
                 <p>Additional information</p>
@@ -65,10 +80,12 @@ export const MovieDetails = () => {
             </div>
             
             }
-            
-             <Outlet/>
+            <Suspense fallback={<div>Loading...</div>}>
+            <Outlet />
+            </Suspense>
         </>
     )
 }
 
+export default MovieDetails
 
