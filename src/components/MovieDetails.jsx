@@ -41,38 +41,47 @@ import { Link, Outlet, useParams } from 'react-router-dom';
 
     return ( 
         <>
-            { resultMovie.title &&
+           
             <div>
-                <button>
+                <button className="mb-5 font-normal font-sans ">
                     <Link to="/"> &#8592; Go back</Link>
                 </button>
                  { !error ? <p>Sorry, there is no information for this movie</p> :
-                    <div>
-                        <h1>{`${resultMovie.title} (${!resultMovie.release_date ? "unknown" : resultMovie.release_date.split('-')[0]}) `}</h1>
-                        <p>{`User Score: ${!resultMovie.vote_average ? "unknown" : resultMovie.vote_average ^ 0}%`}</p>
-                        <h2>Overview</h2>
-                        <p>{`${!resultMovie.overview ? "unknow" : resultMovie.overview}`}</p>
-                        <h2>Genres:</h2>
-                        <p>{`${genres.map(e => (e.name)).join(", ")}`}</p>
+                        <div className="flex mb-3">
+                            {resultMovie.poster_path ? <img src={`https://image.tmdb.org/t/p/w500/${resultMovie.poster_path}`} alt={`poster ${resultMovie.title}`} width={250} /> :
+                                <img src="https://via.placeholder.com/200x200.png?text=NO+PHOTO" alt="no_photo" width={250} />}
+                            <div className="ml-5">
+                                <h1 className="font-sans text-3xl mb-5 font-bold">{`${resultMovie.title} (${!resultMovie.release_date ? "unknown" : resultMovie.release_date.split('-')[0]}) `}</h1>
+                                
+                                <p className="font-sans mb-5 ">{`User Score: ${!resultMovie.vote_average ? "unknown" : resultMovie.vote_average ^ 0}%`}</p>
+                                
+                                <h2 className="font-sans text-2xl mb-5 font-bold">Overview</h2>
+                                
+                                <p className="font-sans mb-5">{`${!resultMovie.overview ? "unknow" : resultMovie.overview}`}</p>
+                                
+                                <h2 className="font-sans text-2xl mb-5 font-bold">Genres:</h2>
+                                
+                                <p className="font-sans ">{`${genres.map(e => (e.name)).join(", ")}`}</p>
 
-                        {resultMovie.poster_path ? <img src={`https://image.tmdb.org/t/p/w500/${resultMovie.poster_path}`} alt={`poster ${resultMovie.title}`} width={250} /> :
-                         <img src="https://via.placeholder.com/200x200.png?text=NO+PHOTO" alt="no_photo"  width={250} />}
+                             </div>
+
+                        
                        
                     </div>
                    
                  } 
 
             </div>
-}
+        
         
             {resultMovie.title &&
-            <div>
+            <div className="border-y-4 ">
                 <p>Additional information</p>
-                <ul>
-                    <li>
+                <ul className="ml-3 ">
+                    <li className="text-blue-600">
                         <Link to="cast" >Cast</Link>     
                     </li>
-                    <li>
+                    <li className="text-blue-600">
                         <Link to="reviews" >Reviews</Link>
                         
                     </li>

@@ -34,13 +34,13 @@ import { useParams } from "react-router-dom"
         <>
             {resultCredits.length ? 
             <section>
-                <ul>
+                <ul className="ml-3 mt-3">
                     {resultCredits.map(item => {
                     return ( 
                         <>
                             {item.profile_path &&
                                 <li key={item.id}>
-                                    <img src={`https://image.tmdb.org/t/p/w500/${item.profile_path}`} alt={`${item.original_name}`} width={100} />
+                                    <img src={`https://image.tmdb.org/t/p/w500/${item.profile_path}`} alt={`${item.original_name}`} width={150} />
                                     <p>{`${item.original_name}`}</p>
                                 </li>}
                         </>

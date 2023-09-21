@@ -41,10 +41,10 @@ import { useParams } from "react-router-dom"
                             console.log(item)
                             return (
                                 <>
-                                    <section>
-                                        <h3>{`${item.author}`}</h3>
+                                    <li>
+                                        <h3 className="font-sans text-2xl mb-5 font-bold">{`${item.author}`}</h3>
                                         <p>{`${item.content}`}</p>
-                                    </section>
+                                    </li>
                            
                                 </>
                             )

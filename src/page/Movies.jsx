@@ -62,10 +62,10 @@ import { Input, Button } from '@mui/material';
         
             </form>
             <section>
-                <ul>
+                <ul className=" p-6">
                 {resultSearchMovie.map(item => {
                     return (
-                        <li key={item.id}>
+                        <li key={item.id} className="font-sans text-blue-600">
                             <Link to={`${item.id}`}  >
                                 {!item.title ? item.name : item.title}
     

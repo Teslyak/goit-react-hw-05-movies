@@ -34,9 +34,9 @@ export const App = () => {
   return (
     <>
 
-    <header  > 
-            <ul >
-                <li>
+    <header className="border-y-1 mb-5 shadow-md " > 
+            <ul className="flex p-6 ">
+                <li className="mr-5">
                     <StyledLink to="/">
                             Home
                     </StyledLink>

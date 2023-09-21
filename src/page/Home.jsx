@@ -35,11 +35,11 @@ import { useState, useEffect} from "react";
   return (
       
     <>
-           <ul >
+           <ul className=" p-6 ">
         {trendigList.map(item => {
           return (
-            <li key={item.id} >
-              <Link to={`movies/${item.id}`}  >
+            <li key={item.id} className="font-sans text-blue-600" >
+              <Link to={`movies/${item.id}`} className="font-sans"  >
                 {!item.title ? item.name : item.title}
               </Link>
               </li>
