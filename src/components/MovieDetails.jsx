@@ -1,12 +1,15 @@
 import { getMoviesDetails } from 'api';
 import { useEffect, useState, Suspense } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 const MovieDetails = () => {
   const [resultMovie, setResultMovie] = useState(null);
   const [genres, setGenres] = useState([]);
   const { movieId } = useParams();
   const [error, setError] = useState(false);
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/';
+
   useEffect(() => {
     const controller = new AbortController();
     const queryDetailsMovie = async () => {
@@ -35,7 +38,7 @@ const MovieDetails = () => {
       {resultMovie?.title && (
         <div>
           <button className="mb-5 font-normal font-sans ">
-            <Link to="/"> &#8592; Go back</Link>
+            <Link to={backLinkHref}> &#8592; Go back</Link>
           </button>
           {error ? (
             <p>Sorry, there is no information for this movie</p>

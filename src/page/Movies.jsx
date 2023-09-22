@@ -1,13 +1,13 @@
 import { getSearchMovie } from 'api';
 import { useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useLocation } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { Input, Button } from '@mui/material';
 
 const Movies = () => {
   const [resultSearchMovie, setResultSearchMovie] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const location = useLocation();
   const onSubmit = e => {
     e.preventDefault();
     const wordQuery = e.currentTarget.elements.searchWord.value.trim();
@@ -66,7 +66,7 @@ const Movies = () => {
           {resultSearchMovie.map(item => {
             return (
               <li key={item.id} className="font-sans text-blue-600">
-                <Link to={`${item.id}`}>
+                <Link to={`${item.id}`} state={{ from: location }}>
                   {!item.title ? item.name : item.title}
                 </Link>
               </li>
